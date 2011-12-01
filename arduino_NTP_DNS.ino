@@ -1,14 +1,14 @@
 /*
 	Udp NTP Client with DNS
 
-	Updated example code to use DNS resolution from the Arduino 1.0 IDE
+	I updated the example code to use DNS resolution from the Arduino 1.0 IDE
 
 	Basically tries to use the load-balanced NTP servers which are
-	  magically returned from DNS queries on pool.ntp.org
+	  "magically" returned from DNS queries on pool.ntp.org
 	If DNS fails, fall back to the hardcoded IP address
 	  for time.nist.gov
 
-	bearpaw7, 01DEC2011
+	bearpaw7 (github), 01DEC2011
 
 	This code is also in the public domain.
 */
