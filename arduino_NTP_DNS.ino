@@ -40,9 +40,9 @@
 // Newer Ethernet shields have a MAC address printed on a sticker on the shield
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 unsigned int localPort = 8888;				// local port to listen for UDP packets
-IPAddress timeServer(192, 43, 244, 18); 	// time.nist.gov NTP server (fallback)
+IPAddress timeServer(192, 43, 244, 18); 		// time.nist.gov NTP server (fallback)
 const int NTP_PACKET_SIZE= 48; 				// NTP time stamp is in the first 48 bytes of the message
-byte packetBuffer[ NTP_PACKET_SIZE]; 		// buffer to hold incoming and outgoing packets 
+byte packetBuffer[ NTP_PACKET_SIZE]; 			// buffer to hold incoming and outgoing packets 
 const char* host = "pool.ntp.org";			// Use random servers through DNS
 
 // A UDP instance to let us send and receive packets over UDP
@@ -75,8 +75,8 @@ void loop()
 	}else{
 		Serial.print("DNS fail...");
 		Serial.print("time.nist.gov = ");
-		Serial.println(timeServer);
-		sendNTPpacket(timeServer); // send an NTP packet to a time server
+		Serial.println(timeServer);	// fallback
+		sendNTPpacket(timeServer); 	// send an NTP packet to a time server
 	}
 	delay(1000);	// wait to see if a reply is available
 	if ( Udp.parsePacket() ) {  
@@ -105,7 +105,7 @@ void loop()
 		
 		// print the hour, minute and second:
 		Serial.print("The UTC time is ");		// UTC is the time at Greenwich Meridian (GMT)
-		Serial.print((epoch	 % 86400L) / 3600); // print the hour (86400 equals secs per day)
+		Serial.print((epoch	 % 86400L) / 3600); 	// print the hour (86400 equals secs per day)
 		Serial.print(':');	
 		if ( ((epoch % 3600) / 60) < 10 ) {
 			// In the first 10 minutes of each hour, we'll want a leading '0'
